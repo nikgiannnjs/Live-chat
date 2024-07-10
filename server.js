@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = require("./app");
 const dotenv = require("dotenv");
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 
 dotenv.config();
 const mongoString = process.env.DATABASE_URL;
@@ -18,6 +20,10 @@ database.on("error", (error) => {
 
 database.once("connected", () => {
   console.log("Database Connected");
+});
+
+io.on("connection", () => {
+  console.log("A user is connected");
 });
 
 app.listen(port, () => {
