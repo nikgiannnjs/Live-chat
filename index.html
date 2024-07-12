@@ -43,6 +43,7 @@
       <div id="messages"></div>
     </div>
     <script>
+      const socket = io();
       $(() => {
         $("#send").click(() => {
           sendMessage({ name: $("#name").val(), message: $("#message").val() });
